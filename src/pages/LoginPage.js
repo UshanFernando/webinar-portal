@@ -22,7 +22,9 @@ class LoginPage extends Component {
         <div className="container text-center mt-4">
           <div className="jumbotron">
             <h1 className="display-3">Welcome Back</h1>
-            <p className="lead">We Appriciate your hardwork to share knownledge</p>
+            <p className="lead">
+              We Appriciate your hardwork to share knownledge
+            </p>
           </div>
           <div className="space"></div>
           <form className="form-signin">
@@ -38,10 +40,9 @@ class LoginPage extends Component {
                   onChange={this.emailInputChange}
                   required
                 />
-                
               </div>
               <div className="col col-5 mt-2 ml-5 mr-5">
-              <input
+                <input
                   type="password"
                   id="inputPassword"
                   className="form-control"
@@ -54,7 +55,11 @@ class LoginPage extends Component {
               {this.state.errText != "" ? (
                 <div className="col col-6 mt-3 ">
                   <div className="alert alert-dismissible alert-danger">
-                    <button type="button" className="close" data-dismiss="alert">
+                    <button
+                      type="button"
+                      className="close"
+                      data-dismiss="alert"
+                    >
                       &times;
                     </button>
                     <strong>Oh snap!</strong>{" "}
@@ -86,6 +91,8 @@ class LoginPage extends Component {
   passwordInputChange = (e) => {
     this.setState({ password: e.target.value });
   };
+
+  //validate input fields
   validateInput = () => {
     if (this.state.email.trim() == "") {
       this.setState({ errText: "Email Field Can't be Empty!" });
@@ -100,7 +107,8 @@ class LoginPage extends Component {
     });
     return true;
   };
-
+  
+  //login function
   login = async (event) => {
     event.preventDefault();
     if (this.validateInput()) {

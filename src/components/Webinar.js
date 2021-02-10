@@ -3,6 +3,7 @@ import "./Webinar.css";
 import zoomLogo from "../assets/zoom.png";
 import teamsLogo from "../assets/teams.png";
 import webexLogo from "../assets/webex.png";
+import Wrapper from "../hoc/Wrapper";
 
 function Webinar(props) {
   var logo = zoomLogo;
@@ -37,9 +38,14 @@ function Webinar(props) {
           <i className="fa fa-plus"></i> Join
         </a>
         {props.edit ? (
-          <button className={"btn btn-danger ml-2"} onClick={props.delete}>
-            <i className="fa fa-trash"></i> Delete
-          </button>
+          <Wrapper>
+            <button className={"btn btn-warning ml-2"} onClick={props.update}>
+              <i className="fa fa-pencil"></i> Edit
+            </button>
+            <button className={"btn btn-danger mt-2"} onClick={props.delete}>
+              <i className="fa fa-trash"></i> Delete
+            </button>
+          </Wrapper>
         ) : null}
       </div>
       <div className="card-header">

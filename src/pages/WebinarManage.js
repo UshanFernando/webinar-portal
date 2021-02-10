@@ -23,6 +23,8 @@ class WebinarManage extends Component {
       errText: "",
       preview: false,
       webinars: null,
+      updateEn: false,
+      updateId: "",
     };
   }
   async componentDidMount() {
@@ -166,7 +168,9 @@ class WebinarManage extends Component {
                 <button
                   type="button"
                   className="btn btn-success"
-                  onClick={this.postWebinar}
+                  onClick={
+                    this.state.updateEn ? this.updateWebinar : this.postWebinar
+                  }
                 >
                   <i className="fa fa-check-circle"></i> Confirm Webinar
                 </button>
@@ -177,7 +181,8 @@ class WebinarManage extends Component {
                   id="postbtn"
                   onClick={this.validateInput}
                 >
-                  Post Webinar <i className="fa fa-location-arrow"></i>
+                  {this.state.updateEn ? "Update Webinar" : "Post Webinar"}
+                  <i className="fa fa-location-arrow"></i>
                 </button>
               )}
             </div>
@@ -191,6 +196,7 @@ class WebinarManage extends Component {
           <WebinarList
             list={this.state.webinars}
             delete={this.deleteWebinar}
+            update={this.handleWebinarUpdate}
             edit={true}
           />
         </div>
@@ -235,7 +241,11 @@ class WebinarManage extends Component {
     } else if (this.state.time.trim() == "") {
       this.setState({ errText: "Time Field Can't be Empty!" });
       return false;
-    } else if (this.state.duration.trim() == "") {
+    } else if (
+      this.state.duration == null ||
+      this.state.duration == 0 ||
+      this.state.duration == ""
+    ) {
       this.setState({ errText: "Duration Field Can't be Empty!" });
       return false;
     } else if (this.state.password.trim() == "") {
@@ -345,6 +355,67 @@ class WebinarManage extends Component {
       this.loadWebinars();
     } catch (e) {
       console.log(e);
+    }
+  };
+  handleWebinarUpdate = (x) => {
+    this.setState({
+      updateEn: true,
+      updateId: x._id,
+      title: x.title,
+      category: x.category,
+      date: x.date,
+      time: x.time,
+      duration: x.duration,
+      url: x.url,
+      password: x.password,
+      platform: x.platform,
+    });
+  };
+  updateWebinar = async () => {
+    if (this.validateInput) {
+      try {
+        const requestOptions = {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            token: Auth.getToken(),
+          },
+          body: JSON.stringify({
+            id: this.state.updateId,
+            title: this.state.title,
+            category: this.state.category,
+            date: this.state.date,
+            time: this.state.time,
+            platform: this.state.platform,
+            url: this.state.url,
+            password: this.state.password,
+            duration: this.state.duration,
+          }),
+        };
+        const data = await fetch(
+          "http://localhost:5000/webinar/private",
+          requestOptions
+        );
+        console.log(data);
+        this.loadWebinars();
+        this.setState({
+          title: "",
+          category: "category",
+          date: "",
+          time: "",
+          duration: "",
+          url: "",
+          meetingId: "",
+          password: "",
+          platform: "platform",
+          errText: "",
+          preview: false,
+          updateEn: false,
+        });
+      } catch (e) {
+        console.log(e);
+      }
+    } else {
     }
   };
 }

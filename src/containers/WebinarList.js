@@ -24,6 +24,7 @@ function WebinarList(props) {
                     url={item.url}
                     edit={Auth.isAuthenticated() && props.edit}
                     delete={() => props.delete(item._id)}
+                    update={() => props.update(item)}
                   />
                 </div>
               );
