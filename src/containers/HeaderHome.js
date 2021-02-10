@@ -12,7 +12,7 @@ function HeaderHome() {
        join us and share your own webinar to people all around the world!
       </p>
       <p className="lead">
-        <a className="btn btn-primary btn-lg" href="#" role="button">
+        <a className="btn btn-primary btn-lg" href="/register" role="button">
          Register Now  
         </a>
       </p>

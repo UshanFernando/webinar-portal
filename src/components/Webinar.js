@@ -8,37 +8,41 @@ function Webinar(props) {
   var logo = zoomLogo;
   var theme = "info";
 
-  if (props.platform == "teams") {
+  if (props.platform == "Teams") {
     logo = teamsLogo;
     theme = "primary";
-  } else if (props.platform == "webex") {
+  } else if (props.platform == "Webex") {
     logo = webexLogo;
     theme = "success";
   }
   return (
-    <div class={"card border-" + theme + " mb-3 webinar"}>
-      <div class="card-body">
-        <h4 class="card-title">{props.title}</h4>
-        <p class="card-text">
+    <div className={"card border-" + theme + " mb-3 webinar"}>
+      <div className="card-body">
+        <h4 className="card-title">{props.title}</h4>
+        <p className="card-text">
           Date : <strong> {props.date}</strong>
           <br />
           Time : <strong> {props.time}</strong>
           <br />
           Duration : <strong> {props.duration}</strong>
         </p>
-        <span class="card-text">
+        <span className="card-text">
           Category : <strong> {props.category}</strong>
         </span>
         <br />
-        <span class="card-text">
-          Meeting ID: <strong>{props.id}</strong>
-        </span>
-        <p class="card-text">
-          Password: <strong>{props.password}</strong>
+        <p className="card-text">
+          Password : <strong>{props.password}</strong>
         </p>
-        <button className={"btn btn-" + theme}>Open</button>
+        <a className={"btn btn-" + theme} href={props.url} target="_blank">
+          <i className="fa fa-plus"></i> Join
+        </a>
+        {props.edit ? (
+          <button className={"btn btn-danger ml-2"} onClick={props.delete}>
+            <i className="fa fa-trash"></i> Delete
+          </button>
+        ) : null}
       </div>
-      <div class="card-header">
+      <div className="card-header">
         <img height="30" src={logo} />
       </div>
     </div>

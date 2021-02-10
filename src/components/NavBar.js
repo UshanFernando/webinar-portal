@@ -1,13 +1,14 @@
 import React from "react";
+import Auth from "../authentication/Auth";
 
 function NavBar() {
   return (
-    <nav class="navbar navbar-expand-md navbar-dark bg-primary py-1 shadow-sm">
-      <a class="navbar-brand" href="#">
+    <nav className="navbar navbar-expand-md navbar-dark bg-primary py-1 shadow-sm">
+      <a className="navbar-brand" href="#">
         Webinar Portal
       </a>
       <button
-        class="navbar-toggler"
+        className="navbar-toggler"
         type="button"
         data-toggle="collapse"
         data-target="#navbarColor01"
@@ -15,65 +16,74 @@ function NavBar() {
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
-        <span class="navbar-toggler-icon"></span>
+        <span className="navbar-toggler-icon"></span>
       </button>
 
-      <div class="collapse navbar-collapse" id="navbarColor01">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">
+      <div className="collapse navbar-collapse" id="navbarColor01">
+        <ul className="navbar-nav mr-auto">
+          <li className="nav-item active">
+            <a className="nav-link" href="/home">
               Home
-              <span class="sr-only">(current)</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              Register as a Teacher
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              Pricing
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              About
-            </a>
-          </li>
-          <li class="nav-item dropdown">
+          {Auth.isAuthenticated() ? (
+            <li className="nav-item">
+              <a className="nav-link" href="\manage">
+                Manage Webinars
+              </a>
+            </li>
+          ) : (
+            <li className="nav-item">
+              <a className="nav-link" href="\register">
+                Register as a Teacher
+              </a>
+            </li>
+          )}
+          <li className="nav-item dropdown">
             <a
-              class="nav-link dropdown-toggle"
+              className="nav-link dropdown-toggle"
               data-toggle="dropdown"
               href="#"
               role="button"
               aria-haspopup="true"
               aria-expanded="false"
             >
-              Dropdown
+              Categories
             </a>
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="#">
-                Action
+            <div className="dropdown-menu">
+              <a className="dropdown-item" href="#">
+                Programming
               </a>
-              <a class="dropdown-item" href="#">
-                Another action
+              <a className="dropdown-item" href="#">
+                Cloud
               </a>
-              <a class="dropdown-item" href="#">
-                Something else here
+              <div className="dropdown-divider"></div>
+              <a className="dropdown-item" href="#">
+                A/L
               </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">
-                Separated link
+              <a className="dropdown-item" href="#">
+                O/L
               </a>
             </div>
           </li>
+          <li className="nav-item">
+            <a className="nav-link" href="#">
+              About
+            </a>
+          </li>
         </ul>
-        <a class="nav-link" href="#">
-          <button type="button" class="btn btn-outline-secondary">
-            Login
-          </button>
-        </a>
+        <li className="nav-link">
+          {Auth.isAuthenticated() ? (
+            <a href="/logout" className="btn btn-outline-secondary">
+              Logout
+            </a>
+          ) : (
+            <a href="/login" className="btn btn-outline-secondary">
+              Login
+            </a>
+          )}
+        </li>
+        <a className="" href="#"></a>
       </div>
     </nav>
   );
