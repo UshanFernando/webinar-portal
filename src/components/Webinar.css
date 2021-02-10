@@ -1,0 +1,8 @@
+.webinar {
+  width: 20rem;
+  min-width: 15rem;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+.webinar:hover {
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
